@@ -1,0 +1,316 @@
+/* ═══════════════════════════
+   HERO.CSS
+═══════════════════════════ */
+
+.hero {
+    position: relative;
+    width: 100%;
+    min-height: 100svh;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: var(--ink);
+}
+
+/* Three.js canvas */
+#hero-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+/* Gradient overlays */
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+        radial-gradient(ellipse 80% 60% at 30% 60%, rgba(200, 133, 106, .18) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 80% 20%, rgba(201, 169, 110, .12) 0%, transparent 55%),
+        linear-gradient(180deg, rgba(13, 11, 10, .3) 0%, transparent 40%, rgba(13, 11, 10, .6) 100%);
+    pointer-events: none;
+}
+
+/* Grain texture overlay */
+.hero-grain {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    opacity: .035;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 200px;
+}
+
+/* Content */
+.hero-content {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    padding: 100px 20px 80px;
+    max-width: 1240px;
+    margin: 0 auto;
+}
+
+.hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: .7rem;
+    font-weight: 600;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--rose-lt);
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp .7s .2s var(--ease-out) forwards;
+}
+
+.hero-eyebrow::before,
+.hero-eyebrow::after {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--rose-lt);
+    opacity: .6;
+}
+
+.hero-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.8rem, 9vw, 6.5rem);
+    font-weight: 900;
+    line-height: .95;
+    color: #fff;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp .7s .35s var(--ease-out) forwards;
+}
+
+.hero-title em {
+    display: block;
+    font-style: italic;
+    font-weight: 400;
+    background: linear-gradient(135deg, var(--rose-lt) 0%, var(--gold-lt) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    padding-bottom: 6px;
+}
+
+.hero-subtitle {
+    font-size: clamp(.9rem, 2.5vw, 1.1rem);
+    color: rgba(255, 255, 255, .6);
+    line-height: 1.7;
+    max-width: 480px;
+    margin-bottom: 36px;
+    opacity: 0;
+    animation: fadeUp .7s .5s var(--ease-out) forwards;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp .7s .65s var(--ease-out) forwards;
+}
+
+/* Stats bar */
+.hero-stats {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    background: rgba(13, 11, 10, .7);
+    backdrop-filter: blur(16px);
+    border-top: 1px solid rgba(255, 255, 255, .06);
+}
+
+.hero-stats-inner {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-around;
+}
+
+.hero-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 12px;
+    text-align: center;
+    position: relative;
+    flex: 1;
+    opacity: 0;
+    animation: fadeUp .6s var(--ease-out) forwards;
+}
+
+.hero-stat:nth-child(1) {
+    animation-delay: .7s;
+}
+
+.hero-stat:nth-child(2) {
+    animation-delay: .8s;
+}
+
+.hero-stat:nth-child(3) {
+    animation-delay: .9s;
+}
+
+.hero-stat:nth-child(4) {
+    animation-delay: 1s;
+}
+
+.hero-stat+.hero-stat::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 25%;
+    bottom: 25%;
+    width: 1px;
+    background: rgba(255, 255, 255, .1);
+}
+
+.hero-stat-value {
+    font-family: var(--font-serif);
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    font-weight: 700;
+    color: var(--gold-lt);
+    line-height: 1;
+    margin-bottom: 4px;
+}
+
+.hero-stat-label {
+    font-size: .68rem;
+    font-weight: 500;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, .4);
+}
+
+/* Scroll cue */
+.hero-scroll {
+    position: absolute;
+    bottom: 80px;
+    right: 24px;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeIn 1s 1.2s forwards;
+}
+
+.hero-scroll span {
+    font-size: .62rem;
+    font-weight: 600;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, .35);
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+}
+
+.hero-scroll-line {
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, transparent, var(--rose));
+    animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+    0% {
+        transform: scaleY(0);
+        transform-origin: top;
+        opacity: 0;
+    }
+
+    50% {
+        transform: scaleY(1);
+        transform-origin: top;
+        opacity: 1;
+    }
+
+    100% {
+        transform: scaleY(0);
+        transform-origin: bottom;
+        opacity: 0;
+    }
+}
+
+/* Floating badge */
+.hero-badge {
+    display: none;
+    position: absolute;
+    top: 120px;
+    right: 40px;
+    z-index: 3;
+    background: rgba(255, 255, 255, .06);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, .12);
+    border-radius: var(--radius-lg);
+    padding: 20px 24px;
+    text-align: center;
+    animation: float 4s ease-in-out infinite;
+}
+
+.hero-badge-icon {
+    font-size: 2rem;
+    margin-bottom: 6px;
+}
+
+.hero-badge strong {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--gold-lt);
+}
+
+.hero-badge span {
+    font-size: .68rem;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, .45);
+}
+
+@media (min-width: 640px) {
+    .hero-stats-inner {
+        justify-content: center;
+        gap: 0;
+    }
+
+    .hero-stat {
+        flex: 0 0 200px;
+    }
+}
+
+@media (min-width: 900px) {
+    .hero-content {
+        padding: 140px 40px 120px;
+    }
+
+    .hero-badge {
+        display: block;
+    }
+
+    .hero-scroll {
+        right: 40px;
+    }
+}
+
+@media (min-width: 1100px) {
+    .hero-content {
+        padding: 160px 60px 130px;
+    }
+}

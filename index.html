@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Feitosa Elegance — Bolsas, relógios e acessórios com estilo e sofisticação." />
+    <meta name="theme-color" content="#0D0B0A" />
+    <title>Feitosa Elegance | Bolsas & Acessórios</title>
+
+    <!-- Remix Icons CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,700&family=Outfit:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+
+    <!-- CSS Modules -->
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/navbar.css" />
+    <link rel="stylesheet" href="css/hero.css" />
+    <link rel="stylesheet" href="css/loja.css" />
+    <link rel="stylesheet" href="css/cart.css" />
+    <link rel="stylesheet" href="css/checkout.css" />
+    <link rel="stylesheet" href="css/sections.css" />
+</head>
+
+<body>
+
+    <!-- ══════════════════════════════════════════
+     NAVBAR
+══════════════════════════════════════════ -->
+    <header class="navbar" id="navbar">
+        <div class="nav-inner">
+            <a href="#home" class="nav-logo" aria-label="Feitosa Elegance">
+                <div class="nav-logo-mark">FE</div>
+                <div class="nav-logo-text">
+                    <strong>Feitosa Elegance</strong>
+                    <span>Bolsas & Acessórios</span>
+                </div>
+            </a>
+
+            <nav class="nav-links" aria-label="Navegação principal">
+                <a href="#home" class="nav-link active">Início</a>
+                <a href="#loja" class="nav-link">Loja</a>
+                <a href="#sobre" class="nav-link">Sobre</a>
+                <a href="#contato" class="nav-link">Contato</a>
+            </nav>
+
+            <div class="nav-actions">
+                <button class="nav-icon-btn" id="cart-btn" aria-label="Abrir carrinho">
+                    <i class="ri-shopping-bag-3-line" style="font-size:1.3rem"></i>
+                    <span class="cart-badge" id="cart-badge">0</span>
+                </button>
+                <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile nav -->
+    <div class="mobile-nav" id="mobile-nav">
+        <nav class="mobile-nav-links">
+            <a href="#home" class="mobile-nav-link active"><i class="ri-home-4-line"></i> Início</a>
+            <a href="#loja" class="mobile-nav-link"><i class="ri-store-2-line"></i> Loja</a>
+            <a href="#sobre" class="mobile-nav-link"><i class="ri-information-line"></i> Sobre</a>
+            <a href="#contato" class="mobile-nav-link"><i class="ri-phone-line"></i> Contato</a>
+        </nav>
+        <div class="mobile-nav-cta">
+            <a href="https://wa.me/5581983207224" target="_blank" class="btn btn-wpp btn-block">
+                <i class="ri-whatsapp-line"></i> Falar no WhatsApp
+            </a>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
+    <section class="hero" id="home" aria-label="Seção principal">
+        <canvas id="hero-canvas" aria-hidden="true"></canvas>
+        <div class="hero-overlay" aria-hidden="true"></div>
+        <div class="hero-grain" aria-hidden="true"></div>
+
+        <div class="hero-content">
+            <p class="hero-eyebrow">Coleção 2025</p>
+            <h1 class="hero-title">
+                Elegância que<br>
+                <em>te define</em>
+            </h1>
+            <p class="hero-subtitle">
+                Bolsas, relógios e acessórios selecionados com critério para quem valoriza o detalhe. Qualidade e
+                sofisticação ao seu alcance.
+            </p>
+            <div class="hero-actions">
+                <a href="#loja" class="btn btn-rose btn-lg">
+                    <i class="ri-store-2-line"></i> Ver Coleção
+                </a>
+                <a href="#sobre" class="btn btn-ghost btn-lg">
+                    Conheça a loja
+                </a>
+            </div>
+        </div>
+
+        <!-- Floating badge -->
+        <div class="hero-badge" aria-hidden="true">
+            <div class="hero-badge-icon">⭐</div>
+            <strong>4.9</strong>
+            <span>Avaliação</span>
+        </div>
+
+        <!-- Scroll cue -->
+        <div class="hero-scroll" aria-hidden="true">
+            <div class="hero-scroll-line"></div>
+            <span>scroll</span>
+        </div>
+
+        <!-- Stats bar -->
+        <div class="hero-stats" aria-label="Destaques da loja">
+            <div class="hero-stats-inner">
+                <div class="hero-stat">
+                    <span class="hero-stat-value" data-count="500" data-prefix="+">+500</span>
+                    <span class="hero-stat-label">Produtos</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-value" data-count="4.9" data-suffix="★">4.9★</span>
+                    <span class="hero-stat-label">Avaliação</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-value" data-count="48" data-suffix="h">48h</span>
+                    <span class="hero-stat-label">Entrega</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-value" data-count="100" data-suffix="%">100%</span>
+                    <span class="hero-stat-label">Satisfação</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+     CATEGORIES HIGHLIGHTS
+══════════════════════════════════════════ -->
+    <section class="cats-highlights" aria-labelledby="cats-title">
+        <div class="container">
+            <div class="section-head reveal animate-up">
+                <p class="tag">Navegue por categoria</p>
+                <h2 class="section-title" id="cats-title">Explore nossa <em>coleção</em></h2>
+            </div>
+            <div class="cats-grid">
+                <button class="cat-card" data-cat="Bolsas">
+                    <div class="cat-card-icon">👜</div>
+                    <p class="cat-card-name">Bolsas</p>
+                    <p class="cat-card-count">15 produtos</p>
+                    <div class="cat-card-arrow"><i class="ri-arrow-right-line"></i></div>
+                </button>
+                <button class="cat-card" data-cat="Relógios">
+                    <div class="cat-card-icon">⌚</div>
+                    <p class="cat-card-name">Relógios</p>
+                    <p class="cat-card-count">7 produtos</p>
+                    <div class="cat-card-arrow"><i class="ri-arrow-right-line"></i></div>
+                </button>
+                <button class="cat-card" data-cat="Carteiras">
+                    <div class="cat-card-icon">💼</div>
+                    <p class="cat-card-name">Carteiras</p>
+                    <p class="cat-card-count">5 produtos</p>
+                    <div class="cat-card-arrow"><i class="ri-arrow-right-line"></i></div>
+                </button>
+                <button class="cat-card" data-cat="Fones">
+                    <div class="cat-card-icon">🎧</div>
+                    <p class="cat-card-name">Fones</p>
+                    <p class="cat-card-count">4 produtos</p>
+                    <div class="cat-card-arrow"><i class="ri-arrow-right-line"></i></div>
+                </button>
+                <button class="cat-card" data-cat="Carregadores">
+                    <div class="cat-card-icon">🔋</div>
+                    <p class="cat-card-name">Carregadores</p>
+                    <p class="cat-card-count">3 produtos</p>
+                    <div class="cat-card-arrow"><i class="ri-arrow-right-line"></i></div>
+                </button>
+                <button class="cat-card" data-cat="Garrafas">
+                    <div class="cat-card-icon">🧴</div>
+                    <p class="cat-card-name">Garrafas</p>
+                    <p class="cat-card-count">5 produtos</p>
+                    <div class="cat-card-arrow"><i class="ri-arrow-right-line"></i></div>
+                </button>
+                <button class="cat-card" data-cat="Estojo">
+                    <div class="cat-card-icon">✏️</div>
+                    <p class="cat-card-name">Estojo</p>
+                    <p class="cat-card-count">1 produto</p>
+                    <div class="cat-card-arrow"><i class="ri-arrow-right-line"></i></div>
+                </button>
+                <button class="cat-card" data-cat="all">
+                    <div class="cat-card-icon">✦</div>
+                    <p class="cat-card-name">Todos</p>
+                    <p class="cat-card-count">Ver todos</p>
+                    <div class="cat-card-arrow"><i class="ri-arrow-right-line"></i></div>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+     FILTER BAR
+══════════════════════════════════════════ -->
+    <div class="filter-bar" role="navigation" aria-label="Filtro de produtos">
+        <div class="filter-inner">
+            <div class="filter-scroll" role="list">
+                <button class="filter-chip active" data-cat="all" role="listitem">
+                    <i class="ri-apps-line"></i> Todos
+                    <span class="filter-chip-count" id="fc-all">40</span>
+                </button>
+                <button class="filter-chip" data-cat="Bolsas" role="listitem">
+                    <i class="ri-handbag-line"></i> Bolsas
+                    <span class="filter-chip-count">15</span>
+                </button>
+                <button class="filter-chip" data-cat="Relógios" role="listitem">
+                    <i class="ri-time-line"></i> Relógios
+                    <span class="filter-chip-count">7</span>
+                </button>
+                <button class="filter-chip" data-cat="Carteiras" role="listitem">
+                    <i class="ri-wallet-3-line"></i> Carteiras
+                    <span class="filter-chip-count">5</span>
+                </button>
+                <button class="filter-chip" data-cat="Fones" role="listitem">
+                    <i class="ri-headphone-line"></i> Fones
+                    <span class="filter-chip-count">4</span>
+                </button>
+                <button class="filter-chip" data-cat="Carregadores" role="listitem">
+                    <i class="ri-battery-charge-line"></i> Carregadores
+                    <span class="filter-chip-count">3</span>
+                </button>
+                <button class="filter-chip" data-cat="Garrafas" role="listitem">
+                    <i class="ri-cup-line"></i> Garrafas
+                    <span class="filter-chip-count">5</span>
+                </button>
+                <button class="filter-chip" data-cat="Estojo" role="listitem">
+                    <i class="ri-pencil-ruler-line"></i> Estojo
+                    <span class="filter-chip-count">1</span>
+                </button>
+            </div>
+            <select class="sort-select" id="sort-select" aria-label="Ordenar produtos">
+                <option value="default">Relevância</option>
+                <option value="price-asc">Menor preço</option>
+                <option value="price-desc">Maior preço</option>
+                <option value="name">A–Z</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+     PRODUCTS / LOJA
+══════════════════════════════════════════ -->
+    <section class="loja" id="loja" aria-labelledby="loja-title">
+        <div class="container">
+            <div class="loja-header">
+                <div>
+                    <p class="tag">Nossa loja</p>
+                    <h2 class="section-title" id="loja-title">Produtos em <em>Destaque</em></h2>
+                    <p class="loja-count" id="loja-count">Carregando produtos…</p>
+                </div>
+            </div>
+
+            <div class="products-grid" id="products-grid" aria-label="Grade de produtos">
+                <!-- Skeleton loading -->
+                ${Array(8).fill(0).map(()=>`
+                <div class="product-skeleton" aria-hidden="true">
+                    <div class="skeleton-img"></div>
+                    <div class="skeleton-body">
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line w-80"></div>
+                        <div class="skeleton-line w-50"></div>
+                        <div class="skeleton-line w-30"></div>
+                    </div>
+                </div>`).join('')}
+            </div>
+
+            <div class="load-more-area">
+                <button class="btn btn-outline" id="load-more-btn" style="display:none">
+                    <i class="ri-arrow-down-s-line"></i> Carregar mais produtos
+                </button>
+                <p class="load-more-hint" id="load-more-hint"></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+     DEPOIMENTOS
+══════════════════════════════════════════ -->
+    <section class="depoimentos" aria-labelledby="dep-title">
+        <div class="container">
+            <div class="section-head center reveal animate-up">
+                <p class="tag">Clientes satisfeitos</p>
+                <h2 class="section-title" id="dep-title">O que dizem sobre <em>nós</em></h2>
+            </div>
+            <div class="dep-track-wrap">
+                <div class="dep-track" id="dep-track">
+
+                    <div class="dep-card">
+                        <div class="dep-stars">★★★★★</div>
+                        <p class="dep-text">"A bolsa chegou antes do prazo e estava perfeita. Qualidade incrível, parece
+                            muito mais cara do que é. Com certeza vou voltar!"</p>
+                        <div class="dep-author">
+                            <div class="dep-avatar">A</div>
+                            <div>
+                                <p class="dep-name">Amanda S.</p>
+                                <p class="dep-product">Bolsa Feminina Premium</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dep-card">
+                        <div class="dep-stars">★★★★★</div>
+                        <p class="dep-text">"Atendimento pelo WhatsApp foi super rápido. Tirei todas as dúvidas antes de
+                            comprar e o relógio chegou impecável. Recomendo demais!"</p>
+                        <div class="dep-author">
+                            <div class="dep-avatar">R</div>
+                            <div>
+                                <p class="dep-name">Rafael M.</p>
+                                <p class="dep-product">Relógio Masculino Elegante</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dep-card dep-card--featured">
+                        <div class="dep-stars">★★★★★</div>
+                        <p class="dep-text">"Já é a terceira vez que compro aqui. Os produtos são lindos, o preço é
+                            justo e o atendimento é sempre muito atencioso. Virei fã!"</p>
+                        <div class="dep-author">
+                            <div class="dep-avatar">J</div>
+                            <div>
+                                <p class="dep-name">Juliana F.</p>
+                                <p class="dep-product">Carteira + Bolsa Kit</p>
+                            </div>
+                        </div>
+                        <div class="dep-featured-tag">⭐ Mais votado</div>
+                    </div>
+
+                    <div class="dep-card">
+                        <div class="dep-stars">★★★★★</div>
+                        <p class="dep-text">"Fone de ouvido chegou bem embalado, funcionando perfeitamente. O processo
+                            de compra pelo WhatsApp foi tranquilo e seguro. Top!"</p>
+                        <div class="dep-author">
+                            <div class="dep-avatar">C</div>
+                            <div>
+                                <p class="dep-name">Carlos E.</p>
+                                <p class="dep-product">Fone Bluetooth Pro</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dep-card">
+                        <div class="dep-stars">★★★★★</div>
+                        <p class="dep-text">"Presente para minha esposa. Ela amou a carteira! Embalagem caprichada,
+                            produto de qualidade. Recomendo sem hesitar."</p>
+                        <div class="dep-author">
+                            <div class="dep-avatar">M</div>
+                            <div>
+                                <p class="dep-name">Marcos P.</p>
+                                <p class="dep-product">Carteira Feminina Rose</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="dep-dots" id="dep-dots" aria-hidden="true"></div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+     BANNER CTA — WhatsApp
+══════════════════════════════════════════ -->
+    <section class="banner-cta" aria-label="Contato via WhatsApp">
+        <div class="banner-inner">
+            <span class="banner-tag">Atendimento direto</span>
+            <h2>Compre pelo WhatsApp<br>com agilidade total</h2>
+            <p>Tire dúvidas, veja o estoque e finalize seu pedido em segundos. Nossa equipe está pronta para te atender!
+            </p>
+            <a href="https://wa.me/5581983207224?text=Ol%C3%A1%2C+vim+pelo+site+e+quero+conhecer+os+produtos!"
+                target="_blank" rel="noopener noreferrer" class="btn btn-wpp btn-lg">
+                <i class="ri-whatsapp-line" style="font-size:1.3rem"></i>
+                Iniciar Conversa
+            </a>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+     SOBRE
+══════════════════════════════════════════ -->
+    <section class="sobre" id="sobre" aria-labelledby="sobre-title">
+        <div class="container">
+            <div class="sobre-grid">
+                <!-- 3D Visual -->
+                <div class="sobre-visual">
+                    <div class="sobre-3d-wrap">
+                        <canvas id="sobre-canvas" aria-hidden="true"></canvas>
+                        <div class="sobre-monogram" aria-hidden="true">FE</div>
+                    </div>
+                    <div class="sobre-float-card" aria-hidden="true">
+                        <span class="sfc-icon">🏆</span>
+                        <div>
+                            <span class="sfc-value">+500</span>
+                            <span class="sfc-label">Produtos</span>
+                        </div>
+                    </div>
+                    <div class="sobre-float-card" aria-hidden="true">
+                        <span class="sfc-icon">⭐</span>
+                        <div>
+                            <span class="sfc-value">4.9</span>
+                            <span class="sfc-label">Avaliação</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text -->
+                <div class="sobre-text">
+                    <p class="tag">Quem somos</p>
+                    <h2 class="section-title" id="sobre-title">Bem-vindo à<br><em>Feitosa Elegance</em></h2>
+                    <div class="divider"></div>
+                    <p>Nossa loja foi criada com um propósito claro: trazer a você o melhor em bolsas, relógios e
+                        acessórios. Itens que são mais do que simples produtos — são extensões da sua personalidade.</p>
+                    <p>Cada peça da nossa coleção foi cuidadosamente selecionada para garantir os mais altos padrões de
+                        qualidade e design. Aqui, estilo encontra praticidade e sofisticação.</p>
+                    <div class="sobre-perks">
+                        <div class="perk">
+                            <div class="perk-icon"><i class="ri-shield-check-line"></i></div>
+                            Curadoria exclusiva de produtos de qualidade
+                        </div>
+                        <div class="perk">
+                            <div class="perk-icon"><i class="ri-truck-line"></i></div>
+                            Entrega rápida para todo o Brasil
+                        </div>
+                        <div class="perk">
+                            <div class="perk-icon"><i class="ri-whatsapp-line"></i></div>
+                            Atendimento personalizado via WhatsApp
+                        </div>
+                        <div class="perk">
+                            <div class="perk-icon"><i class="ri-refund-2-line"></i></div>
+                            Satisfação garantida em todas as compras
+                        </div>
+                    </div>
+                    <a href="#loja" class="btn btn-primary mt-3">
+                        <i class="ri-store-2-line"></i> Explorar produtos
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+     EQUIPE
+══════════════════════════════════════════ -->
+    <section class="equipe" aria-labelledby="equipe-title">
+        <div class="container">
+            <div class="section-head center">
+                <p class="tag">Nossa equipe</p>
+                <h2 class="section-title" id="equipe-title">Quem faz a <em>Feitosa</em></h2>
+            </div>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-avatar">K</div>
+                    <h3>Karla Feitosa</h3>
+                    <span class="team-role">Gestora & Co-fundadora</span>
+                    <p>Pós-graduada, Karla lidera a gestão estratégica e o desenvolvimento da marca com olhar apurado
+                        para tendências e qualidade.</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar">FE</div>
+                    <h3>Equipe Feitosa</h3>
+                    <span class="team-role">Atendimento & Vendas</span>
+                    <p>Time dedicado a garantir a melhor experiência de compra, do atendimento personalizado à entrega
+                        do seu produto.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+     CONTATO (Melhorado)
+══════════════════════════════════════════ -->
+    <section class="contato" id="contato" aria-labelledby="contato-title">
+        <div class="container">
+            <div class="section-head center reveal animate-up">
+                <p class="tag">Fale conosco</p>
+                <h2 class="section-title" id="contato-title">Entre em <em>contato</em></h2>
+                <div class="divider center"></div>
+                <p class="contato-subtitle">Estamos prontos para te atender. Escolha o canal mais conveniente.</p>
+            </div>
+
+            <div class="contato-top-cards">
+                <a href="https://wa.me/5581983207224" target="_blank" class="contato-card contato-card--wpp">
+                    <div class="contato-card-icon"><i class="ri-whatsapp-line"></i></div>
+                    <div class="contato-card-body">
+                        <p class="contato-card-label">WhatsApp</p>
+                        <p class="contato-card-value">(81) 98320-7224</p>
+                        <span class="contato-card-cta">Clique para chamar <i class="ri-arrow-right-line"></i></span>
+                    </div>
+                </a>
+                <a href="https://www.instagram.com/feitosaelegance/" target="_blank"
+                    class="contato-card contato-card--ig">
+                    <div class="contato-card-icon"><i class="ri-instagram-line"></i></div>
+                    <div class="contato-card-body">
+                        <p class="contato-card-label">Instagram</p>
+                        <p class="contato-card-value">@feitosaelegance</p>
+                        <span class="contato-card-cta">Ver perfil <i class="ri-arrow-right-line"></i></span>
+                    </div>
+                </a>
+                <div class="contato-card contato-card--hours">
+                    <div class="contato-card-icon"><i class="ri-time-line"></i></div>
+                    <div class="contato-card-body">
+                        <p class="contato-card-label">Horário de Atendimento</p>
+                        <p class="contato-card-value">Seg – Sáb</p>
+                        <span class="contato-card-time">9h às 18h</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contato-map-section">
+                <div class="contato-map-info">
+                    <div class="contato-address-block">
+                        <div class="cab-icon"><i class="ri-map-pin-2-fill"></i></div>
+                        <div>
+                            <p class="cab-label">Nosso endereço</p>
+                            <p class="cab-address">Rua Senador Barros de Carvalho, 69E</p>
+                            <p class="cab-city">Socorro — Jaboatão dos Guararapes / PE</p>
+                            <p class="cab-zip">CEP: 54160-270</p>
+                        </div>
+                    </div>
+                    <div class="contato-map-actions">
+                        <a href="https://maps.google.com/?q=Rua+Sen.+Barros+de+Carvalho,+69,+Socorro,+Jaboatão+dos+Guararapes+PE"
+                            target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                            <i class="ri-map-2-line"></i> Abrir no Google Maps
+                        </a>
+                        <a href="https://wa.me/5581983207224?text=Ol%C3%A1!+Vim+pelo+site+e+quero+conhecer+a+loja."
+                            target="_blank" rel="noopener noreferrer" class="btn btn-wpp">
+                            <i class="ri-whatsapp-line"></i> Falar no WhatsApp
+                        </a>
+                    </div>
+                </div>
+                <div class="contato-map-embed">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3949.918944336601!2d-34.98820898901505!3d-8.10973588110531!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7ab1dafbaff4471%3A0x9bfcba8bb5f109a3!2sEntrada%20da%20Granja%20-%20R.%20Sen.%20Barros%20de%20Carvalho%2C%2069%20-%20Socorro%2C%20Jaboat%C3%A3o%20dos%20Guararapes%20-%20PE%2C%2054160-270!5e0!3m2!1spt-BR!2sbr!4v1774380499895!5m2!1spt-BR!2sbr"
+                        width="100%" height="300" style="border:0; border-radius:12px;" allowfullscreen=""
+                        loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                        title="Localização Feitosa Elegance"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand-col">
+                    <div class="footer-logo">
+                        <div class="footer-logo-mark">FE</div>
+                        <div class="footer-logo-text">
+                            <strong>Feitosa Elegance</strong>
+                            <span>Bolsas & Acessórios</span>
+                        </div>
+                    </div>
+                    <p class="footer-tagline">Estilo que define você. Qualidade que você merece.</p>
+                    <div class="footer-social">
+                        <a href="https://www.instagram.com/feitosaelegance/" target="_blank" class="footer-social-btn"
+                            aria-label="Instagram">
+                            <i class="ri-instagram-line"></i>
+                        </a>
+                        <a href="https://wa.me/5581983207224" target="_blank" class="footer-social-btn"
+                            aria-label="WhatsApp">
+                            <i class="ri-whatsapp-line"></i>
+                        </a>
+                        <a href="https://www.facebook.com/" target="_blank" class="footer-social-btn"
+                            aria-label="Facebook">
+                            <i class="ri-facebook-line"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-links-col">
+                    <h4>Navegação</h4>
+                    <nav class="footer-links">
+                        <a href="#home">Início</a>
+                        <a href="#loja">Loja</a>
+                        <a href="#sobre">Sobre</a>
+                        <a href="#contato">Contato</a>
+                    </nav>
+                </div>
+
+                <div class="footer-links-col">
+                    <h4>Categorias</h4>
+                    <nav class="footer-links">
+                        <a href="#loja">Bolsas</a>
+                        <a href="#loja">Relógios</a>
+                        <a href="#loja">Carteiras</a>
+                        <a href="#loja">Fones</a>
+                    </nav>
+                </div>
+
+                <div class="footer-links-col">
+                    <h4>Contato</h4>
+                    <div class="footer-links">
+                        <a href="https://wa.me/5581983207224" target="_blank">
+                            <i class="ri-whatsapp-line"></i> (81) 98320-7224
+                        </a>
+                        <a href="https://www.instagram.com/feitosaelegance/" target="_blank">
+                            <i class="ri-instagram-line"></i> @feitosaelegance
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2025 Feitosa Elegance. Todos os direitos reservados.</p>
+                <p>Desenvolvido com ♥ para você</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ══════════════════════════════════════════
+     CART DRAWER
+══════════════════════════════════════════ -->
+    <div class="cart-overlay" id="cart-overlay" aria-hidden="true"></div>
+    <aside class="cart-drawer" id="cart-drawer" role="complementary" aria-label="Carrinho de compras">
+        <div class="cart-header">
+            <div class="cart-title-wrap">
+                <h2 class="cart-title">Carrinho</h2>
+                <span class="cart-items-count" id="cart-items-count">0</span>
+            </div>
+            <button class="cart-close-btn" id="cart-close-btn" aria-label="Fechar carrinho">
+                <i class="ri-close-line" style="font-size:1.3rem"></i>
+            </button>
+        </div>
+
+        <!-- Free shipping progress -->
+        <div class="free-shipping-bar">
+            <p class="free-shipping-text">
+                <i class="ri-truck-line"></i>
+                <span id="ship-text">Faltam R$ 200,00 para frete grátis</span>
+            </p>
+            <div class="free-shipping-progress">
+                <div class="free-shipping-fill" id="ship-fill" style="width:0%"></div>
+                <div class="ship-truck" id="ship-truck" aria-hidden="true">🚚</div>
+            </div>
+        </div>
+
+        <div class="cart-body" id="cart-body" role="list" aria-label="Itens no carrinho">
+            <!-- Rendered by JS -->
+        </div>
+
+        <div class="cart-footer" id="cart-footer" style="display:none">
+            <div class="cart-subtotal">
+                <span class="text-muted">Subtotal</span>
+                <span class="cart-subtotal-val" id="cart-subtotal-val">R$ 0,00</span>
+            </div>
+            <div class="cart-note">
+                💚 Pague com <strong>PIX</strong> e ganhe <strong>5% de desconto</strong>!
+            </div>
+            <button class="btn btn-primary btn-block" id="checkout-btn">
+                <i class="ri-secure-payment-line"></i>
+                Finalizar Pedido
+            </button>
+        </div>
+    </aside>
+
+    <!-- ══════════════════════════════════════════
+     CHECKOUT MODAL
+══════════════════════════════════════════ -->
+    <div class="modal-backdrop" id="checkout-backdrop" aria-modal="true" role="dialog" aria-label="Finalizar pedido">
+        <div class="checkout-modal" id="checkout-modal">
+            <!-- Rendered by checkout.js -->
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <!-- ══════════════════════════════════════════
+     SCRIPTS
+══════════════════════════════════════════ -->
+
+    <!-- Three.js (apenas para seção Sobre) -->
+    <script>
+        const threeScript = document.createElement('script');
+        threeScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+        threeScript.onload = () => window.dispatchEvent(new Event('threejs-ready'));
+        document.head.appendChild(threeScript);
+    </script>
+
+    <!-- Category card click → filter -->
+    <script>
+        document.querySelectorAll('.cat-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const cat = card.dataset.cat;
+                // Trigger the filter chip
+                const chip = document.querySelector(`.filter-chip[data-cat="${cat}"]`);
+                if (chip) chip.click();
+                document.getElementById('loja').scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+
+    <!-- App entry (ES modules) -->
+    <script type="module" src="js/app.js"></script>
+
+    <!-- ══════════════════════════════════════════
+     FAB — WhatsApp Flutuante
+══════════════════════════════════════════ -->
+    <a href="https://wa.me/5581983207224?text=Ol%C3%A1!+Vim+pelo+site+e+quero+conhecer+os+produtos." target="_blank"
+        rel="noopener noreferrer" class="wpp-fab" id="wpp-fab" aria-label="Falar no WhatsApp">
+        <i class="ri-whatsapp-line wpp-fab-icon"></i>
+        <span class="wpp-fab-label">Falar agora</span>
+        <span class="wpp-fab-ring" aria-hidden="true"></span>
+        <span class="wpp-fab-ring wpp-fab-ring--2" aria-hidden="true"></span>
+    </a>
+
+</body>
+
+</html>

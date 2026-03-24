@@ -1,0 +1,57 @@
+/* products.js — Feitosa Elegance */
+const PRODUCTS = [
+    { id: 1, name: "Bolsa Morizetti Rio Classic", price: 200.00, image: "images/bolsa1.png", cat: "Bolsas", badge: "hot", desc: "Design clássico com acabamento sofisticado para o dia a dia." },
+    { id: 2, name: "Bolsa Morizetti Rio Premium", price: 550.00, image: "images/bolsa2.png", cat: "Bolsas", badge: "new", desc: "Couro sintético premium, ampla capacidade e forro exclusivo." },
+    { id: 3, name: "Bolsa Morizetti Compact", price: 290.00, image: "images/bolsa3.png", cat: "Bolsas", badge: null, desc: "Tamanho compacto ideal para passeios e eventos especiais." },
+    { id: 4, name: "Bolsa Morizetti Soft", price: 200.00, image: "images/bolsa4.png", cat: "Bolsas", badge: null, desc: "Material macio e resistente com detalhes refinados." },
+    { id: 5, name: "Bolsa Morizetti Urban", price: 300.00, image: "images/bolsa5.png", cat: "Bolsas", badge: null, desc: "Estilo urbano moderno com alça ajustável e bolsos internos." },
+    { id: 6, name: "Bolsa Morizetti Night", price: 200.00, image: "images/bolsa6.png", cat: "Bolsas", badge: null, desc: "Perfeita para noites especiais, com acabamento elegante." },
+    { id: 7, name: "Bolsa Morizetti Casual", price: 200.00, image: "images/bolsa7.png", cat: "Bolsas", badge: null, desc: "Versátil para o uso diário com múltiplos compartimentos." },
+    { id: 8, name: "Bolsa Morizetti Elite", price: 321.00, image: "images/bolsa8.png", cat: "Bolsas", badge: "hot", desc: "Acabamento elite com alça dourada e forro premium." },
+    { id: 9, name: "Bolsa Morizetti Style", price: 321.00, image: "images/bolsa9.png", cat: "Bolsas", badge: null, desc: "Estilo único com textura especial e design exclusivo." },
+    { id: 10, name: "Bolsa Morizetti Luxe", price: 321.00, image: "images/bolsa10.png", cat: "Bolsas", badge: "new", desc: "Linha luxe com materiais nobres e costura impecável." },
+    { id: 11, name: "Bolsa Morizetti Grande", price: 321.00, image: "images/bolsa11.png", cat: "Bolsas", badge: null, desc: "Grande capacidade para quem precisa carregar tudo com elegância." },
+    { id: 12, name: "Bolsa Morizetti Slim", price: 321.00, image: "images/bolsa12.png", cat: "Bolsas", badge: null, desc: "Perfil slim e moderno, ideal para ambientes corporativos." },
+    { id: 13, name: "Bolsa Térmica Thermo Prime", price: 64.90, image: "images/termica1.png", cat: "Bolsas", badge: null, desc: "Revestimento interno isolante, ideal para lanches e bebidas." },
+    { id: 14, name: "Bolsa Térmica Adventure 750ml", price: 79.90, image: "images/termica2.png", cat: "Bolsas", badge: null, desc: "Resistente para viagens e trilhas, mantém temperatura por horas." },
+    { id: 15, name: "Bolsa Térmica Minimal Black", price: 69.90, image: "images/termica3.png", cat: "Bolsas", badge: null, desc: "Design minimalista com alça ajustável e vedação eficiente." },
+    { id: 27, name: "Carteira Morizetti Classic", price: 89.90, image: "images/carteira1.png", cat: "Carteiras", badge: null, desc: "Elegante em material sintético premium, compacta e resistente." },
+    { id: 28, name: "Carteira Morizetti Executive", price: 109.90, image: "images/carteira2.png", cat: "Carteiras", badge: "hot", desc: "Múltiplos compartimentos para cartões, documentos e dinheiro." },
+    { id: 29, name: "Carteira Morizetti Slim", price: 74.90, image: "images/carteira3.png", cat: "Carteiras", badge: null, desc: "Modelo slim ideal para praticidade sem abrir mão do estilo." },
+    { id: 30, name: "Carteira Morizetti Urban", price: 95.00, image: "images/carteira4.png", cat: "Carteiras", badge: null, desc: "Moderna com acabamento refinado e excelente durabilidade." },
+    { id: 31, name: "Carteira Morizetti Premium", price: 129.90, image: "images/carteira5.png", cat: "Carteiras", badge: "new", desc: "Textura sofisticada e alta capacidade de armazenamento." },
+    { id: 51, name: "Relógio Orient Classic Chrono", price: 499.90, image: "images/relogio1.png", cat: "Relógios", badge: "hot", desc: "Design sofisticado com acabamento em aço inox." },
+    { id: 52, name: "Relógio Orient Executive Gold", price: 549.90, image: "images/relogio2.png", cat: "Relógios", badge: null, desc: "Detalhes dourados e visual premium para ocasiões formais." },
+    { id: 53, name: "Relógio Orient Sport Analog", price: 459.90, image: "images/relogio3.png", cat: "Relógios", badge: null, desc: "Visual esportivo com alta resistência e mostrador legível." },
+    { id: 54, name: "Relógio Orient Automático Premium", price: 799.90, image: "images/relogio4.png", cat: "Relógios", badge: "new", desc: "Mecanismo automático de alta precisão com acabamento refinado." },
+    { id: 55, name: "Relógio Orient Urban Black", price: 429.90, image: "images/relogio5.png", cat: "Relógios", badge: null, desc: "Design moderno com pulseira confortável e estilo urbano." },
+    { id: 64, name: "Relógio Orient Carbon Edition", price: 749.90, image: "images/relogio14.png", cat: "Relógios", badge: "new", desc: "Acabamento inspirado em fibra de carbono, design arrojado." },
+    { id: 65, name: "Relógio Orient Signature", price: 999.90, image: "images/relogio15.png", cat: "Relógios", badge: "hot", desc: "Linha premium Orient com visual exclusivo e sofisticado." },
+    { id: 32, name: "Fone Bluetooth SoundPro", price: 149.90, image: "images/fone1.png", cat: "Fones", badge: null, desc: "Som estéreo de alta qualidade e bateria de longa duração." },
+    { id: 33, name: "Fone Bass Boost", price: 179.90, image: "images/fone2.png", cat: "Fones", badge: "hot", desc: "Graves potentes e isolamento acústico imersivo." },
+    { id: 34, name: "Fone Wireless Comfort", price: 129.90, image: "images/fone3.png", cat: "Fones", badge: null, desc: "Design ergonômico ideal para longos períodos de uso." },
+    { id: 35, name: "Fone Gamer Pro", price: 199.90, image: "images/fone4.png", cat: "Fones", badge: "new", desc: "Microfone integrado e som direcional de alta precisão." },
+    { id: 37, name: "Powerbank Fast 10000mAh", price: 129.90, image: "images/carregador1.png", cat: "Carregadores", badge: null, desc: "Compacto com carregamento rápido para uso diário." },
+    { id: 38, name: "Ultra Charge 20000mAh", price: 189.90, image: "images/carregador2.png", cat: "Carregadores", badge: "hot", desc: "Alta capacidade para múltiplas recargas com proteção total." },
+    { id: 39, name: "Slim Power Bank", price: 99.90, image: "images/carregador3.png", cat: "Carregadores", badge: null, desc: "Design fino e leve perfeito para o bolso ou mochila." },
+    { id: 41, name: "Garrafa Hydro Steel 500ml", price: 59.90, image: "images/garrafa1.png", cat: "Garrafas", badge: null, desc: "Aço inox que mantém líquidos gelados ou quentes por horas." },
+    { id: 42, name: "Garrafa Fitness Pro 750ml", price: 49.90, image: "images/garrafa2.png", cat: "Garrafas", badge: null, desc: "Para treinos e atividades ao ar livre, com tampa antifugas." },
+    { id: 43, name: "Garrafa Urban Style 600ml", price: 69.90, image: "images/garrafa3.png", cat: "Garrafas", badge: "new", desc: "Design moderno com excelente vedação e acabamento premium." },
+    { id: 44, name: "Garrafa Squeeze Active 700ml", price: 39.90, image: "images/garrafa4.png", cat: "Garrafas", badge: null, desc: "Leve e prática, perfeita para academia e uso diário." },
+    { id: 45, name: "Garrafa Thermo Plus 1L", price: 89.90, image: "images/garrafa5.png", cat: "Garrafas", badge: null, desc: "Alta capacidade com isolamento térmico avançado." },
+    { id: 66, name: "Estojo Infantil", price: 39.90, image: "images/estojo1.png", cat: "Estojo", badge: null, desc: "Prático e resistente, ideal para organizar material escolar." },
+];
+
+const CAT_ICONS = {
+    "Bolsas": "👜",
+    "Relógios": "⌚",
+    "Carteiras": "💼",
+    "Fones": "🎧",
+    "Carregadores": "🔋",
+    "Garrafas": "🧴",
+    "Estojo": "✏️",
+};
+
+const CATEGORIES = [...new Set(PRODUCTS.map(p => p.cat))];
+
+export { PRODUCTS, CAT_ICONS, CATEGORIES };
