@@ -1,7 +1,3 @@
-/* ═══════════════════════════
-   CART.CSS — Cart Drawer
-═══════════════════════════ */
-
 .cart-overlay {
     position: fixed;
     inset: 0;
@@ -340,10 +336,6 @@
     border-left: 2px solid var(--gold);
 }
 
-/* ══════════════════════════════════════════════
-   MELHORIA 5 — Barra de frete animada
-══════════════════════════════════════════════ */
-
 .free-shipping-bar {
     padding: 12px 20px;
     background: var(--parchment);
@@ -423,10 +415,6 @@
     }
 }
 
-/* ══════════════════════════════════════════════
-   MELHORIA 6 — Estado vazio elegante
-══════════════════════════════════════════════ */
-
 .cart-empty {
     display: flex;
     flex-direction: column;
@@ -467,10 +455,6 @@
     line-height: 1.6;
     max-width: 210px;
 }
-
-/* ══════════════════════════════════════════════
-   MELHORIA 3 — Micro-interações carrinho
-══════════════════════════════════════════════ */
 
 /* Flash no ícone do carrinho quando item é adicionado */
 .nav-icon-btn.cart-flash {

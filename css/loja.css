@@ -1,8 +1,3 @@
-/* ═══════════════════════════
-   LOJA.CSS — Products Section
-═══════════════════════════ */
-
-/* ── Filter Bar ── */
 .filter-bar {
     padding: 0;
     background: rgba(250, 247, 242, .97);
@@ -497,10 +492,6 @@
     }
 }
 
-/* ══════════════════════════════════════════════
-   MELHORIA 2 — Barra de busca
-══════════════════════════════════════════════ */
-
 .search-wrap {
     margin-bottom: 28px;
 }
@@ -586,10 +577,6 @@
     padding: 0 2px;
 }
 
-/* ══════════════════════════════════════════════
-   MELHORIA 3 — Badge "no carrinho" + preço PIX
-══════════════════════════════════════════════ */
-
 .pcard-in-cart {
     position: absolute;
     bottom: 10px;
@@ -634,10 +621,6 @@
 .pcard-pix-price i {
     font-size: .8rem;
 }
-
-/* ══════════════════════════════════════════════
-   MELHORIA 1 — Modal de detalhes do produto
-══════════════════════════════════════════════ */
 
 .pmodal-backdrop {
     position: fixed;

@@ -47,10 +47,7 @@ function load() {
     try { const d = localStorage.getItem('fe_cart'); if (d) cart = JSON.parse(d); } catch (e) { }
 }
 
-/* ════════════════════════════════════════════
-   MELHORIA 3 — Micro-interação: "fly to cart"
-   Bolinha animada voa do produto até o ícone
-════════════════════════════════════════════ */
+
 function flyToCart(product) {
     // Encontra o botão que foi clicado (último add-btn com .adding)
     const btn = document.querySelector('.add-btn.adding, .add-to-cart-btn.adding');
@@ -130,10 +127,7 @@ function updateBadge() {
     if (countEl) countEl.textContent = total;
 }
 
-/* ════════════════════════════════════════════
-   MELHORIA 5 — Barra de frete animada
-   Caminhão se move com o progresso + gradiente
-════════════════════════════════════════════ */
+
 function shippingProgress() {
     const FREE_THRESHOLD = 200;
     const total = getTotal();
@@ -159,9 +153,7 @@ function shippingProgress() {
     }
 }
 
-/* ════════════════════════════════════════════
-   MELHORIA 6 — Estado vazio elegante
-════════════════════════════════════════════ */
+
 function renderEmpty() {
     return `
     <div class="cart-empty">

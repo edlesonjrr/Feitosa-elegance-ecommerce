@@ -1,6 +1,5 @@
 /* ui.js — Toast, Hero Canvas, Lazy, Nav, Observers */
 
-/* ── Toast ── */
 const toastEl = document.getElementById('toast');
 let toastTimer;
 export function showToast(html) {
@@ -10,10 +9,6 @@ export function showToast(html) {
     toastTimer = setTimeout(() => toastEl.classList.remove('show'), 2800);
 }
 
-/* ══════════════════════════════════════════════
-   MELHORIA 8 — Som de feedback (Web Audio API)
-   Toque suave ao adicionar produto ao carrinho
-══════════════════════════════════════════════ */
 export function playSfx() {
     try {
         const ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -124,12 +119,7 @@ export function initScrollReveal() {
     });
 }
 
-/* ═══════════════════════════════════════════════════
-   HERO — Elegant Organic Canvas (pure 2D, no Three.js)
-   Formas suaves: orbs com gradiente, pontos brilhantes,
-   linhas curvas fluidas, parallax no mouse.
-   Leve e otimizado para mobile.
-═══════════════════════════════════════════════════ */
+
 export function initHero3D() {
     const canvas = document.getElementById('hero-canvas');
     if (!canvas) return;
@@ -245,7 +235,6 @@ export function initHero3D() {
         // 2 ── Linhas curvas (skip on reduced motion)
         if (!prefersReduced) {
             curves.forEach(curve => {
-                // move pontos
                 curve.pts.forEach(p => {
                     p.x += p.vx; p.y += p.vy;
                     if (p.x < 0 || p.x > 1) p.vx *= -1;
@@ -253,7 +242,7 @@ export function initHero3D() {
                     p.x = Math.max(0, Math.min(1, p.x));
                     p.y = Math.max(0, Math.min(1, p.y));
                 });
-                // desenha
+
                 const pts = curve.pts;
                 ctx.beginPath();
                 ctx.moveTo(pts[0].x * W, pts[0].y * H);
@@ -367,7 +356,7 @@ export function initAbout3D() {
     })();
 }
 
-/* ── Filter bar elevation ── */
+
 export function initFilterBarElevation() {
     const bar = document.querySelector('.filter-bar');
     if (!bar) return;
@@ -376,21 +365,17 @@ export function initFilterBarElevation() {
     }, { passive: true });
 }
 
-/* ════════════════════════════════════════════
-   MELHORIA 4 — Contadores animados no Hero
-   Números sobem do zero até o valor final
-   quando a section aparece na viewport
-════════════════════════════════════════════ */
+
 export function initCounters() {
     const stats = document.querySelectorAll('.hero-stat-value[data-count]');
     if (!stats.length) return;
 
-    const ease = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; // easeInOutCubic
+    const ease = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
     function animateCounter(el) {
-        const raw = el.dataset.count;         // ex: "500", "4.9", "100"
-        const prefix = el.dataset.prefix || ''; // ex: "+"
-        const suffix = el.dataset.suffix || ''; // ex: "★", "h", "%"
+        const raw = el.dataset.count;
+        const prefix = el.dataset.prefix || '';
+        const suffix = el.dataset.suffix || '';
         const target = parseFloat(raw);
         const isFloat = raw.includes('.');
         const duration = 1800;
@@ -421,10 +406,7 @@ export function initCounters() {
     stats.forEach(el => obs.observe(el));
 }
 
-/* ════════════════════════════════════════════
-   MELHORIA 1 — Carrossel de Depoimentos
-   Drag/swipe + auto-play + dots
-════════════════════════════════════════════ */
+
 export function initDepoimentos() {
     const section = document.querySelector('.depoimentos');
     const track = document.getElementById('dep-track');
@@ -436,7 +418,7 @@ export function initDepoimentos() {
     let current = 0;
     let autoId = null;
     let animating = false;
-    let sectionVisible = false; // usuário está vendo a seção?
+    let sectionVisible = false;
 
     /* ── Dots ── */
     cards.forEach((_, i) => {
@@ -465,9 +447,9 @@ export function initDepoimentos() {
     function next() { goTo(current + 1 >= total ? 0 : current + 1); }
     function prev() { goTo(current - 1 < 0 ? total - 1 : current - 1); }
 
-    /* ── Auto-play: só roda quando a seção está visível ── */
+    /* ── Auto-play ── */
     function startAuto() {
-        if (!sectionVisible) return;   // <-- não inicia se fora da tela
+        if (!sectionVisible) return;
         stopAuto();
         autoId = setInterval(next, 4200);
     }
@@ -480,17 +462,17 @@ export function initDepoimentos() {
         startAuto();
     }
 
-    /* ── IntersectionObserver na seção ── */
+
     const sectionObs = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             sectionVisible = entry.isIntersecting;
             if (sectionVisible) {
-                startAuto();          // começa quando entra na tela
+                startAuto();
             } else {
-                stopAuto();           // para quando sai
+                stopAuto();
             }
         });
-    }, { threshold: 0.2 }); // 20% da seção visível já basta
+    }, { threshold: 0.2 });
 
     sectionObs.observe(section);
 

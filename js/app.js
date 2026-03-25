@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initCounters();
     initDepoimentos();
 
-    // Three.js — apenas seção Sobre
     if (typeof THREE !== 'undefined') {
         initAbout3D();
     } else {
@@ -24,6 +23,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Hero canvas (2D, sem Three.js)
     initHero3D();
 });

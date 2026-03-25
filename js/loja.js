@@ -14,9 +14,6 @@ const grid = document.getElementById('products-grid');
 const countEl = document.getElementById('loja-count');
 const loadBtn = document.getElementById('load-more-btn');
 
-/* ══════════════════════════════════════════════
-   MELHORIA 2 — Busca em tempo real
-══════════════════════════════════════════════ */
 export function initSearch() {
   // Injeta a barra de busca dinamicamente acima da grade
   const lojaHeader = document.querySelector('.loja-header');
@@ -88,9 +85,6 @@ function pixPrice(price) {
   return (price * 0.95).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 }
 
-/* ══════════════════════════════════════════════
-   MELHORIA 3 — Badge de quantidade no card
-══════════════════════════════════════════════ */
 function getCartQty(id) {
   return getCart().find(i => i.id === id)?.qty || 0;
 }
@@ -150,10 +144,6 @@ function cardHTML(p, idx = 0) {
     </article>`;
 }
 
-/* ══════════════════════════════════════════════
-   MELHORIA 1 — Modal de detalhes do produto
-   Bottom sheet no mobile, modal central no desktop
-══════════════════════════════════════════════ */
 function openProductModal(product) {
   const existing = document.getElementById('product-modal-backdrop');
   if (existing) existing.remove();

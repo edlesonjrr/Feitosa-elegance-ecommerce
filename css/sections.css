@@ -1,7 +1,3 @@
-/* ═══════════════════════════════════
-   SECTIONS.CSS — About, CTA, Footer
-═══════════════════════════════════ */
-
 /* ── Categories Highlights ── */
 .cats-highlights {
     padding: 56px 0;
@@ -654,10 +650,6 @@
     }
 }
 
-/* ══════════════════════════════════════════════
-   CONTATO — Seção Melhorada
-══════════════════════════════════════════════ */
-
 .contato-subtitle {
     font-size: .93rem;
     color: var(--ink-60);
@@ -936,9 +928,6 @@
     width: fit-content;
 }
 
-/* ══════════════════════════════════════════════
-   MELHORIA 1 — Depoimentos / Carrossel
-══════════════════════════════════════════════ */
 
 .depoimentos {
     padding: 80px 0;
@@ -1106,9 +1095,6 @@
     border-radius: 4px;
 }
 
-/* ══════════════════════════════════════════════
-   MELHORIA 2 — WhatsApp FAB
-══════════════════════════════════════════════ */
 
 .wpp-fab {
     position: fixed;
