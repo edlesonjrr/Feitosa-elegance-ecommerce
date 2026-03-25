@@ -144,11 +144,15 @@
     border-radius: var(--radius-md);
     overflow: hidden;
     border: 1px solid rgba(13, 11, 10, .07);
-    transition: transform var(--t-base), box-shadow var(--t-base), border-color var(--t-base);
+    transition: opacity 0.35s var(--ease-out), transform 0.35s var(--ease-out), box-shadow var(--t-base), border-color var(--t-base);
     display: flex;
     flex-direction: column;
     position: relative;
     cursor: pointer;
+    /* Isola repaints — melhora scroll performance */
+    contain: layout style;
+    /* Reserva espaço para imagem antes de carregar */
+    min-height: 200px;
 }
 
 .product-card:hover {
@@ -157,8 +161,24 @@
     border-color: var(--rose-lt);
 }
 
+/* Entrada controlada por IntersectionObserver — não bloqueia layout */
 .product-card.entering {
-    animation: scaleIn .35s var(--ease-out) both;
+    opacity: 0;
+    transform: translateY(16px);
+}
+
+.product-card.entering.entered {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.35s var(--ease-out), transform 0.35s var(--ease-out);
+}
+
+/* Respeita prefer-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+    .product-card.entering {
+        opacity: 1;
+        transform: none;
+    }
 }
 
 /* Image wrapper */
@@ -174,6 +194,11 @@
     height: 100%;
     object-fit: cover;
     transition: transform .5s var(--ease);
+    /* will-change apenas no hover — evita camadas GPU o tempo todo */
+    aspect-ratio: 1;
+}
+
+.product-card:hover .pcard-img img {
     will-change: transform;
 }
 
@@ -469,5 +494,424 @@
 @media (min-width: 1100px) {
     .products-grid {
         grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* ══════════════════════════════════════════════
+   MELHORIA 2 — Barra de busca
+══════════════════════════════════════════════ */
+
+.search-wrap {
+    margin-bottom: 28px;
+}
+
+.search-box {
+    position: relative;
+    max-width: 480px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.1rem;
+    color: var(--ink-30);
+    pointer-events: none;
+    transition: color var(--t-fast);
+}
+
+.search-input {
+    width: 100%;
+    padding: 13px 44px 13px 44px;
+    border: 1.5px solid rgba(13, 11, 10, .12);
+    border-radius: var(--radius-full);
+    font-family: var(--font-sans);
+    font-size: .9rem;
+    color: var(--ink);
+    background: #fff;
+    transition: border-color var(--t-fast), box-shadow var(--t-fast);
+    -webkit-appearance: none;
+}
+
+.search-input::placeholder {
+    color: var(--ink-30);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--rose);
+    box-shadow: 0 0 0 3px rgba(200, 133, 106, .12);
+}
+
+.search-input:focus~.search-icon,
+.search-box:focus-within .search-icon {
+    color: var(--rose);
+}
+
+/* Remove X nativo do Safari */
+.search-input::-webkit-search-cancel-button {
+    display: none;
+}
+
+.search-clear {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-30);
+    font-size: .95rem;
+    transition: background var(--t-fast), color var(--t-fast);
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.search-clear:hover {
+    background: rgba(13, 11, 10, .08);
+    color: var(--ink);
+}
+
+/* Highlight do texto buscado */
+.pcard-name mark {
+    background: rgba(200, 133, 106, .25);
+    color: var(--rose-dk);
+    border-radius: 2px;
+    padding: 0 2px;
+}
+
+/* ══════════════════════════════════════════════
+   MELHORIA 3 — Badge "no carrinho" + preço PIX
+══════════════════════════════════════════════ */
+
+.pcard-in-cart {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    z-index: 3;
+    background: var(--emerald);
+    color: #fff;
+    font-size: .7rem;
+    font-weight: 700;
+    padding: 4px 9px;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    box-shadow: 0 2px 8px rgba(45, 106, 79, .35);
+    animation: scaleIn .2s var(--ease-spring);
+}
+
+.product-card.in-cart {
+    border-color: rgba(45, 106, 79, .3);
+}
+
+.product-card.in-cart .pcard-img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 2px solid rgba(45, 106, 79, .2);
+    border-radius: inherit;
+    pointer-events: none;
+}
+
+.pcard-pix-price {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-size: .72rem;
+    font-weight: 600;
+    color: var(--emerald);
+    margin-top: 2px;
+}
+
+.pcard-pix-price i {
+    font-size: .8rem;
+}
+
+/* ══════════════════════════════════════════════
+   MELHORIA 1 — Modal de detalhes do produto
+══════════════════════════════════════════════ */
+
+.pmodal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(13, 11, 10, .6);
+    backdrop-filter: blur(6px);
+    z-index: 700;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity .32s var(--ease);
+}
+
+.pmodal-backdrop.open {
+    opacity: 1;
+}
+
+.pmodal {
+    background: var(--ivory);
+    width: 100%;
+    max-width: 680px;
+    max-height: 92svh;
+    max-height: 92vh;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+    transform: translateY(100%);
+    transition: transform .38s var(--ease);
+    scrollbar-width: none;
+}
+
+.pmodal::-webkit-scrollbar {
+    display: none;
+}
+
+.pmodal-backdrop.open .pmodal {
+    transform: translateY(0);
+}
+
+.pmodal-handle {
+    width: 40px;
+    height: 4px;
+    background: var(--sand-dk);
+    border-radius: 4px;
+    margin: 14px auto 0;
+    flex-shrink: 0;
+}
+
+.pmodal-close {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    background: rgba(13, 11, 10, .06);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: var(--ink-60);
+    transition: background var(--t-fast), color var(--t-fast);
+    z-index: 2;
+    border: none;
+    cursor: pointer;
+}
+
+.pmodal-close:hover {
+    background: rgba(13, 11, 10, .12);
+    color: var(--ink);
+}
+
+.pmodal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.pmodal-img-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    background: var(--parchment);
+    overflow: hidden;
+    max-height: 340px;
+}
+
+.pmodal-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.pmodal-img-fallback {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    background: linear-gradient(135deg, var(--parchment), var(--sand));
+}
+
+.pmodal-badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    padding: 5px 12px;
+    border-radius: var(--radius-full);
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+}
+
+.pmodal-info {
+    padding: 24px 20px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.pmodal-cat {
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--rose);
+}
+
+.pmodal-name {
+    font-family: var(--font-serif);
+    font-size: clamp(1.4rem, 5vw, 1.9rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--ink);
+}
+
+.pmodal-desc {
+    font-size: .9rem;
+    color: var(--ink-60);
+    line-height: 1.7;
+}
+
+.pmodal-pricing {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px;
+    background: rgba(13, 11, 10, .03);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(13, 11, 10, .06);
+}
+
+.pmodal-price-label {
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-30);
+    display: block;
+    margin-bottom: 2px;
+}
+
+.pmodal-price {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1;
+}
+
+.pmodal-pix-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(45, 106, 79, .07);
+    border: 1px solid rgba(45, 106, 79, .18);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+}
+
+.pmodal-pix-box>i {
+    font-size: 1.3rem;
+    color: var(--emerald);
+    flex-shrink: 0;
+}
+
+.pmodal-pix-label {
+    display: block;
+    font-size: .65rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--emerald);
+    opacity: .7;
+}
+
+.pmodal-pix-price {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--emerald);
+    display: block;
+}
+
+.pmodal-pix-badge {
+    margin-left: auto;
+    font-size: .68rem;
+    font-weight: 700;
+    background: var(--emerald);
+    color: #fff;
+    padding: 3px 9px;
+    border-radius: var(--radius-full);
+    flex-shrink: 0;
+}
+
+.pmodal-perks {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.pmodal-perk {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: .82rem;
+    color: var(--ink-60);
+}
+
+.pmodal-perk i {
+    color: var(--rose);
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.pmodal-add-btn {
+    margin-top: 4px;
+    transition: background .25s var(--ease), transform .15s var(--ease), box-shadow .25s var(--ease) !important;
+}
+
+/* Desktop: modal centralizado */
+@media (min-width: 640px) {
+    .pmodal-backdrop {
+        align-items: center;
+    }
+
+    .pmodal {
+        border-radius: var(--radius-lg);
+        max-height: 88vh;
+    }
+
+    .pmodal-handle {
+        display: none;
+    }
+
+    .pmodal-body {
+        flex-direction: row;
+        align-items: stretch;
+    }
+
+    .pmodal-img-wrap {
+        flex: 0 0 300px;
+        max-height: none;
+        aspect-ratio: unset;
+        border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+    }
+
+    .pmodal-info {
+        flex: 1;
+        padding: 32px 28px;
+        overflow-y: auto;
     }
 }

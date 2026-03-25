@@ -10,6 +10,39 @@ export function showToast(html) {
     toastTimer = setTimeout(() => toastEl.classList.remove('show'), 2800);
 }
 
+/* ══════════════════════════════════════════════
+   MELHORIA 8 — Som de feedback (Web Audio API)
+   Toque suave ao adicionar produto ao carrinho
+══════════════════════════════════════════════ */
+export function playSfx() {
+    try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        // Nota 1 — tique suave
+        const o1 = ctx.createOscillator();
+        const g1 = ctx.createGain();
+        o1.connect(g1); g1.connect(ctx.destination);
+        o1.type = 'sine';
+        o1.frequency.setValueAtTime(880, ctx.currentTime);
+        o1.frequency.exponentialRampToValueAtTime(1100, ctx.currentTime + 0.08);
+        g1.gain.setValueAtTime(0.18, ctx.currentTime);
+        g1.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.18);
+        o1.start(ctx.currentTime);
+        o1.stop(ctx.currentTime + 0.18);
+        // Nota 2 — harmônico mais suave
+        const o2 = ctx.createOscillator();
+        const g2 = ctx.createGain();
+        o2.connect(g2); g2.connect(ctx.destination);
+        o2.type = 'sine';
+        o2.frequency.setValueAtTime(1320, ctx.currentTime + 0.06);
+        g2.gain.setValueAtTime(0.09, ctx.currentTime + 0.06);
+        g2.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.28);
+        o2.start(ctx.currentTime + 0.06);
+        o2.stop(ctx.currentTime + 0.28);
+    } catch (e) { /* silencia se não suportado */ }
+}
+
+
+
 /* ── Navbar scroll ── */
 export function initNavbar() {
     const nav = document.getElementById('navbar');
@@ -393,79 +426,144 @@ export function initCounters() {
    Drag/swipe + auto-play + dots
 ════════════════════════════════════════════ */
 export function initDepoimentos() {
+    const section = document.querySelector('.depoimentos');
     const track = document.getElementById('dep-track');
     const dotsEl = document.getElementById('dep-dots');
-    if (!track) return;
+    if (!track || !section) return;
 
     const cards = track.querySelectorAll('.dep-card');
     const total = cards.length;
     let current = 0;
-    let autoId;
+    let autoId = null;
+    let animating = false;
+    let sectionVisible = false; // usuário está vendo a seção?
 
-    // Criar dots
+    /* ── Dots ── */
     cards.forEach((_, i) => {
         const dot = document.createElement('button');
         dot.className = 'dep-dot' + (i === 0 ? ' active' : '');
         dot.setAttribute('aria-label', `Depoimento ${i + 1}`);
-        dot.addEventListener('click', () => goTo(i));
+        dot.addEventListener('click', () => { goTo(i); resetAuto(); });
         dotsEl.appendChild(dot);
     });
 
     function getCardWidth() {
-        return cards[0].offsetWidth + 20; // 20 = gap
+        return cards[0].getBoundingClientRect().width + 20;
     }
 
     function goTo(idx) {
-        current = Math.max(0, Math.min(idx, total - 1));
-        const offset = current * getCardWidth();
-        track.style.transform = `translateX(-${offset}px)`;
-        dotsEl.querySelectorAll('.dep-dot').forEach((d, i) => {
-            d.classList.toggle('active', i === current);
-        });
+        if (animating) return;
+        animating = true;
+        current = ((idx % total) + total) % total;
+        track.style.transform = `translateX(-${current * getCardWidth()}px)`;
+        dotsEl.querySelectorAll('.dep-dot').forEach((d, i) =>
+            d.classList.toggle('active', i === current)
+        );
+        setTimeout(() => { animating = false; }, 460);
     }
 
     function next() { goTo(current + 1 >= total ? 0 : current + 1); }
+    function prev() { goTo(current - 1 < 0 ? total - 1 : current - 1); }
 
-    // Auto-play
-    function startAuto() { autoId = setInterval(next, 4500); }
-    function stopAuto() { clearInterval(autoId); }
-    startAuto();
-
-    // Drag/swipe
-    let startX = 0, isDragging = false, moved = false;
-    const wrap = track.parentElement;
-
-    wrap.addEventListener('pointerdown', e => {
-        isDragging = true;
-        moved = false;
-        startX = e.clientX;
+    /* ── Auto-play: só roda quando a seção está visível ── */
+    function startAuto() {
+        if (!sectionVisible) return;   // <-- não inicia se fora da tela
         stopAuto();
+        autoId = setInterval(next, 4200);
+    }
+    function stopAuto() {
+        clearInterval(autoId);
+        autoId = null;
+    }
+    function resetAuto() {
+        stopAuto();
+        startAuto();
+    }
+
+    /* ── IntersectionObserver na seção ── */
+    const sectionObs = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            sectionVisible = entry.isIntersecting;
+            if (sectionVisible) {
+                startAuto();          // começa quando entra na tela
+            } else {
+                stopAuto();           // para quando sai
+            }
+        });
+    }, { threshold: 0.2 }); // 20% da seção visível já basta
+
+    sectionObs.observe(section);
+
+    /* ── Page visibility API: pausa quando aba fica em background ── */
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            stopAuto();
+        } else if (sectionVisible) {
+            startAuto();
+        }
     });
 
-    wrap.addEventListener('pointermove', e => {
+    /* ── Touch/swipe nativo ── */
+    const wrap = track.parentElement;
+    let touchStartX = 0, touchStartY = 0, touchMoved = false;
+
+    wrap.addEventListener('touchstart', e => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        touchMoved = false;
+        stopAuto();
+    }, { passive: true });
+
+    wrap.addEventListener('touchmove', e => {
+        const dx = Math.abs(e.touches[0].clientX - touchStartX);
+        const dy = Math.abs(e.touches[0].clientY - touchStartY);
+        if (dx > dy && dx > 8) {
+            touchMoved = true;
+            e.preventDefault();
+        }
+    }, { passive: false });
+
+    wrap.addEventListener('touchend', e => {
+        const diff = e.changedTouches[0].clientX - touchStartX;
+        if (touchMoved) {
+            if (diff < -40) next();
+            else if (diff > 40) prev();
+        }
+        resetAuto();
+    }, { passive: true });
+
+    /* ── Mouse drag (desktop) ── */
+    let mouseStartX = 0, isDragging = false, mouseMoved = false;
+
+    wrap.addEventListener('mousedown', e => {
+        isDragging = true; mouseMoved = false;
+        mouseStartX = e.clientX;
+        stopAuto();
+        wrap.style.cursor = 'grabbing';
+    });
+
+    window.addEventListener('mousemove', e => {
         if (!isDragging) return;
-        moved = Math.abs(e.clientX - startX) > 5;
+        mouseMoved = Math.abs(e.clientX - mouseStartX) > 6;
     });
 
-    wrap.addEventListener('pointerup', e => {
+    window.addEventListener('mouseup', e => {
         if (!isDragging) return;
         isDragging = false;
-        const diff = e.clientX - startX;
-        if (moved) {
+        wrap.style.cursor = 'grab';
+        if (mouseMoved) {
+            const diff = e.clientX - mouseStartX;
             if (diff < -40) next();
-            else if (diff > 40) goTo(current - 1 < 0 ? total - 1 : current - 1);
+            else if (diff > 40) prev();
         }
-        startAuto();
+        resetAuto();
     });
 
-    wrap.addEventListener('pointerleave', () => {
-        if (isDragging) { isDragging = false; startAuto(); }
-    });
+    wrap.addEventListener('mouseenter', stopAuto);
+    wrap.addEventListener('mouseleave', () => { if (!isDragging) startAuto(); });
 
-    // Pausa no hover desktop
-    track.addEventListener('mouseenter', stopAuto);
-    track.addEventListener('mouseleave', startAuto);
+    window.addEventListener('resize', () => goTo(current), { passive: true });
 
-    // Inicializa
     goTo(0);
+    // NÃO chama startAuto() aqui — o Observer cuida disso
 }

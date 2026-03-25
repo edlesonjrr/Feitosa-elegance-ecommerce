@@ -199,7 +199,7 @@
 /* Scroll cue */
 .hero-scroll {
     position: absolute;
-    bottom: 80px;
+    bottom: 160px;
     right: 24px;
     z-index: 3;
     display: flex;
@@ -208,6 +208,13 @@
     gap: 8px;
     opacity: 0;
     animation: fadeIn 1s 1.2s forwards;
+}
+
+@media (max-width: 599px) {
+    .hero-scroll {
+        bottom: 180px;
+        right: 16px;
+    }
 }
 
 .hero-scroll span {
@@ -250,6 +257,7 @@
 /* Floating badge */
 .hero-badge {
     display: none;
+
     position: absolute;
     top: 120px;
     right: 40px;
